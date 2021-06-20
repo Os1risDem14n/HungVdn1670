@@ -24,6 +24,11 @@ namespace HungVdn1670.Models
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
+        
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Course> Courses { get; set; }
+        public DbSet<UserInCourse> UserInCourses { get; set; }
+        public DbSet<UserDetail> UserDetails { get; set; }
 
         public static ApplicationDbContext Create()
         {

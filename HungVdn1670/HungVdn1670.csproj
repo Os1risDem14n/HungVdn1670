@@ -173,10 +173,30 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202106201336432_CreateCategoryDB.cs" />
+    <Compile Include="Migrations\202106201336432_CreateCategoryDB.Designer.cs">
+      <DependentUpon>202106201336432_CreateCategoryDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106201338056_CreateCourseDB.cs" />
+    <Compile Include="Migrations\202106201338056_CreateCourseDB.Designer.cs">
+      <DependentUpon>202106201338056_CreateCourseDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106201340264_CreateUserInCourseDB.cs" />
+    <Compile Include="Migrations\202106201340264_CreateUserInCourseDB.Designer.cs">
+      <DependentUpon>202106201340264_CreateUserInCourseDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202106201800223_CreateUserDetailDB.cs" />
+    <Compile Include="Migrations\202106201800223_CreateUserDetailDB.Designer.cs">
+      <DependentUpon>202106201800223_CreateUserDetailDB.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Category.cs" />
+    <Compile Include="Models\Course.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\UserDetail.cs" />
+    <Compile Include="Models\UserInCourse.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -252,6 +272,20 @@
     <None Include="packages.config" />
     <Content Include="Scripts\jquery-3.4.1.slim.min.map" />
     <Content Include="Scripts\jquery-3.4.1.min.map" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\202106201336432_CreateCategoryDB.resx">
+      <DependentUpon>202106201336432_CreateCategoryDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106201338056_CreateCourseDB.resx">
+      <DependentUpon>202106201338056_CreateCourseDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106201340264_CreateUserInCourseDB.resx">
+      <DependentUpon>202106201340264_CreateUserInCourseDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106201800223_CreateUserDetailDB.resx">
+      <DependentUpon>202106201800223_CreateUserDetailDB.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
