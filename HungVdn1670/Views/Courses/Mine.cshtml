@@ -1,0 +1,33 @@
+﻿@model IEnumerable<HungVdn1670.Models.Course>
+
+@{
+    ViewBag.Title = "Mine";
+}
+
+<h2>Mine Courses</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <ul class="list-group">
+            <li class="list-group-item list-group-item-info">My Courses</li>
+            @foreach (var course in Model)
+            {
+                <li class="list-group-item">
+                    @course.Name
+                    <div>
+                        <span>
+                            @Html.ActionLink(
+                                "Details",
+                                "Details",
+                                "Courses",
+                                new { id = course.Id },
+                                new { @class = "btn btn-primary" }
+                            )
+                        </span>
+                    </div>
+                </li>
+
+            }
+        </ul>
+    </div>
+</div>
