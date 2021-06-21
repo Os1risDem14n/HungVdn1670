@@ -8,7 +8,7 @@
 
 <h2>Edit My User Information</h2>
 
-@using (Html.BeginForm("Edit", "UserInfos", FormMethod.Post))
+@using (Html.BeginForm("Edit", "UserDetails", FormMethod.Post))
 {
     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
     @Html.HiddenFor(m => m.UserId)

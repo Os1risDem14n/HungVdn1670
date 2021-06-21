@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using HungVdn1670.Models;
+using HungVdn1670;
 
 namespace HungVdn1670.Controllers
 {
@@ -17,12 +18,13 @@ namespace HungVdn1670.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
+        private ApplicationDbContext _context;
         public AccountController()
         {
+            _context = new ApplicationDbContext();
         }
 
-        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager )
+        public AccountController(ApplicationUserManager userManager, ApplicationSignInManager signInManager)
         {
             UserManager = userManager;
             SignInManager = signInManager;
@@ -34,9 +36,9 @@ namespace HungVdn1670.Controllers
             {
                 return _signInManager ?? HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
             }
-            private set 
-            { 
-                _signInManager = value; 
+            private set
+            {
+                _signInManager = value;
             }
         }
 
@@ -120,7 +122,7 @@ namespace HungVdn1670.Controllers
             // If a user enters incorrect codes for a specified amount of time then the user account 
             // will be locked out for a specified amount of time. 
             // You can configure the account lockout settings in IdentityConfig
-            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent:  model.RememberMe, rememberBrowser: model.RememberBrowser);
+            var result = await SignInManager.TwoFactorSignInAsync(model.Provider, model.Code, isPersistent: model.RememberMe, rememberBrowser: model.RememberBrowser);
             switch (result)
             {
                 case SignInStatus.Success:
@@ -142,6 +144,109 @@ namespace HungVdn1670.Controllers
             return View();
         }
 
+        [HttpGet]
+        [Authorize(Roles = "admin")]
+        public ActionResult CreateStaff()
+        {
+            return View();
+        }
+        [HttpPost]
+        [Authorize(Roles = "admin")]
+        public async Task<ActionResult> CreateStaff(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    UserManager.AddToRole(user.Id, "staff");
+                    var userDetail = new UserDetail
+                    {
+                        FullName = model.FullName,
+                        Age = model.Age,
+                        UserId = user.Id,
+                    };
+                    _context.UserDetails.Add(userDetail);
+                    _context.SaveChanges();
+
+                    return RedirectToAction("Index", "Staffs");
+                }
+                AddErrors(result);
+            }
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "admin")]
+        public ActionResult CreateTrainer()
+        {
+            return View();
+        }
+        [HttpPost]
+        [Authorize(Roles = "admin")]
+        public async Task<ActionResult> CreateTrainer(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    UserManager.AddToRole(user.Id, "trainer");
+                    var userDetail = new UserDetail
+                    {
+                        FullName = model.FullName,
+                        Age = model.Age,
+                        UserId = user.Id
+                    };
+                    _context.UserDetails.Add(userDetail);
+                    _context.SaveChanges();
+
+                    return RedirectToAction("Index", "Trainers");
+                }
+                AddErrors(result);
+            }
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+        [HttpGet]
+        [Authorize(Roles = "staff")]
+        public ActionResult CreateTrainee()
+        {
+            return View();
+        }
+        [HttpPost]
+        [Authorize(Roles = "staff")]
+        public async Task<ActionResult> CreateTrainee(RegisterViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await UserManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    UserManager.AddToRole(user.Id, "trainee");
+                    var userDetail = new UserDetail
+                    {
+                        FullName = model.FullName,
+                        Age = model.Age,
+                        UserId = user.Id
+                    };
+                    _context.UserDetails.Add(userDetail);
+                    _context.SaveChanges();
+
+                    return RedirectToAction("Index", "Trainees");
+                }
+                AddErrors(result);
+            }
+            // If we got this far, something failed, redisplay form
+            return View(model);
+        }
+
+
         //
         // POST: /Account/Register
         [HttpPost]
@@ -155,8 +260,16 @@ namespace HungVdn1670.Controllers
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent:false, rememberBrowser:false);
-                    
+                    var userDetail = new UserDetail
+                    {
+                        FullName = model.FullName,
+                        Age = model.Age,
+                        UserId = user.Id
+                    };
+                    _context.UserDetails.Add(userDetail);
+                    _context.SaveChanges();
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
                     // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
                     // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
