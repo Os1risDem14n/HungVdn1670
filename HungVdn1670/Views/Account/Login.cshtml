@@ -3,62 +3,57 @@
 @model LoginViewModel
 @{
     ViewBag.Title = "Log in";
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
 }
 
-<h2>@ViewBag.Title.</h2>
-<div class="row">
-    <div class="col-md-8">
-        <section id="loginForm">
-            @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-            {
-                @Html.AntiForgeryToken()
-                <h4>Use a local account to log in.</h4>
-                <hr />
-                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
-                    <div class="col-md-10">
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
-                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            @Html.CheckBoxFor(m => m.RememberMe)
-                            @Html.LabelFor(m => m.RememberMe)
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Log in" class="btn btn-default" />
-                    </div>
-                </div>
-                <p>
-                    @Html.ActionLink("Register as a new user", "Register")
-                </p>
-                @* Enable this once you have account confirmation enabled for password reset functionality
-                    <p>
-                        @Html.ActionLink("Forgot your password?", "ForgotPassword")
-                    </p>*@
-            }
-        </section>
+<div class="p-5">
+    <div class="text-center">
+        <h1 class="h4 text-gray-900 mb-4">@ViewData["Title"]</h1>
     </div>
-    <div class="col-md-4">
-        <section id="socialLoginForm">
-            @Html.Partial("_ExternalLoginsListPartial", new ExternalLoginListViewModel { ReturnUrl = ViewBag.ReturnUrl })
-        </section>
-    </div>
+    @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "user", role = "form" }))
+    {
+        @Html.AntiForgeryToken()
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.TextBoxFor(m => m.Email, new { @class = "form-control form-control-user", @placeholder = "Enter Email Address..." })
+            @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.PasswordFor(m => m.Password, new { @class = "form-control form-control-user", @placeholder = "Password" })
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            <div class="custom-control custom-checkbox small">
+                @Html.CheckBoxFor(m => m.RememberMe, new { @class = "custom-control-input" })
+                @Html.LabelFor(m => m.RememberMe, new { @class = "custom-control-label" })
+            </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-user btn-block">Đăng nhập</button>
+        <hr />
+
+        <button class="btn btn-google btn-user btn-block"
+                name="provider" value="Google"
+                title="Log in using your Google account">
+            <i class="fab fa-google fa-fw"></i>
+            Log in using your Google account
+        </button>
+
+        <button class="btn btn-facebook btn-user btn-block"
+                name="provider" value="Facebook"
+                title="Log in using your Facebook account">
+            <i class="fab fa-facebook-f fa-fw"></i>
+            Log in using your Facebook account
+        </button>
+
+        <hr />
+
+        <div class="text-center">
+            @Html.ActionLink("Register as a new user", "Register")
+        </div>
+
+    }
 </div>
-
-@section Scripts {
-    @Scripts.Render("~/bundles/jqueryval")
-}

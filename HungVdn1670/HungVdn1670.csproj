@@ -218,6 +218,16 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="lib\boostrap\dist\css\bootstrap-grid.css" />
+    <Content Include="lib\boostrap\dist\css\bootstrap-grid.min.css" />
+    <Content Include="lib\boostrap\dist\css\bootstrap-reboot.css" />
+    <Content Include="lib\boostrap\dist\css\bootstrap-reboot.min.css" />
+    <Content Include="lib\boostrap\dist\css\bootstrap.css" />
+    <Content Include="lib\boostrap\dist\css\bootstrap.min.css" />
+    <Content Include="lib\boostrap\dist\js\bootstrap.bundle.js" />
+    <Content Include="lib\boostrap\dist\js\bootstrap.bundle.min.js" />
+    <Content Include="lib\boostrap\dist\js\bootstrap.js" />
+    <Content Include="lib\boostrap\dist\js\bootstrap.min.js" />
     <Content Include="lib\font-awesome\css\all.css" />
     <Content Include="lib\font-awesome\css\all.min.css" />
     <Content Include="lib\font-awesome\css\brands.css" />
@@ -256,6 +266,18 @@
     <Content Include="lib\jquery-easing\jquery.easing.compatibility.min.js" />
     <Content Include="lib\jquery-easing\jquery.easing.js" />
     <Content Include="lib\jquery-easing\jquery.easing.min.js" />
+    <Content Include="lib\jquery\jquery.js" />
+    <Content Include="lib\jquery\jquery.min.js" />
+    <Content Include="lib\jquery\jquery.slim.js" />
+    <Content Include="lib\jquery\jquery.slim.min.js" />
+    <Content Include="sbadmin\css\sb-admin-2.css" />
+    <Content Include="sbadmin\css\sb-admin-2.min.css" />
+    <Content Include="sbadmin\js\demo\chart-area-demo.js" />
+    <Content Include="sbadmin\js\demo\chart-bar-demo.js" />
+    <Content Include="sbadmin\js\demo\chart-pie-demo.js" />
+    <Content Include="sbadmin\js\demo\datatables-demo.js" />
+    <Content Include="sbadmin\js\sb-admin-2.js" />
+    <Content Include="sbadmin\js\sb-admin-2.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="libman.json" />
@@ -272,6 +294,18 @@
     <Content Include="lib\font-awesome\webfonts\fa-solid-900.woff" />
     <Content Include="lib\font-awesome\webfonts\fa-solid-900.woff2" />
     <Content Include="lib\jquery-easing\jquery.easing.compatibility.min.js.map" />
+    <Content Include="lib\jquery\jquery.min.map" />
+    <Content Include="lib\jquery\jquery.slim.min.map" />
+    <Content Include="lib\boostrap\dist\css\bootstrap-grid.css.map" />
+    <Content Include="lib\boostrap\dist\css\bootstrap-grid.min.css.map" />
+    <Content Include="lib\boostrap\dist\css\bootstrap-reboot.css.map" />
+    <Content Include="lib\boostrap\dist\css\bootstrap-reboot.min.css.map" />
+    <Content Include="lib\boostrap\dist\css\bootstrap.css.map" />
+    <Content Include="lib\boostrap\dist\css\bootstrap.min.css.map" />
+    <Content Include="lib\boostrap\dist\js\bootstrap.bundle.js.map" />
+    <Content Include="lib\boostrap\dist\js\bootstrap.bundle.min.js.map" />
+    <Content Include="lib\boostrap\dist\js\bootstrap.js.map" />
+    <Content Include="lib\boostrap\dist\js\bootstrap.min.js.map" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -346,6 +380,7 @@
     <Content Include="Views\Account\CreateStaff.cshtml" />
     <Content Include="Views\Account\CreateTrainee.cshtml" />
     <Content Include="Views\Account\CreateTrainer.cshtml" />
+    <Content Include="Views\Shared\_LoginLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
