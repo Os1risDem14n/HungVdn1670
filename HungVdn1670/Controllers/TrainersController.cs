@@ -9,7 +9,7 @@ using System.Web.Mvc;
 
 namespace HungVdn1670.Controllers
 {
-    [Authorize(Roles = "admin")]
+    [Authorize(Roles = "admin,staff")]
     public class TrainersController : Controller
     {
         private ApplicationDbContext _context;

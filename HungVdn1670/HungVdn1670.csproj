@@ -381,6 +381,7 @@
     <Content Include="Views\Account\CreateTrainee.cshtml" />
     <Content Include="Views\Account\CreateTrainer.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
+    <Content Include="Views\Trainees\ShowAllCourses.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

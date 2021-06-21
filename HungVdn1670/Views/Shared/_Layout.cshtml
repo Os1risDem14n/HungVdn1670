@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - HungVdn1670 Application</title>
+    <title>@ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
@@ -30,6 +30,10 @@
                     }
                     @if (User.IsInRole("staff"))
                     {
+                        <li>@Html.ActionLink("Trainer", "ShowTrainers", "Trainers")</li>
+                    }
+                    @if (User.IsInRole("staff"))
+                    {
                         <li>@Html.ActionLink("Trainee", "Index", "Trainees")</li>
                     }
                     @if (User.IsInRole("staff"))
@@ -44,6 +48,10 @@
                     {
                         <li>@Html.ActionLink("My Courses", "Mine", "Courses")</li>
                     }
+                    @if (User.IsInRole("trainee"))
+                    {
+                        <li>@Html.ActionLink("All Courses", "ShowAllCourses", "Trainees")</li>
+                    }
                     <li>@Html.ActionLink("My Info", "Index", "UserDetails")</li>
                 </ul>
                 @Html.Partial("_LoginPartial")
@@ -54,7 +62,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Os1riS Dem14n</p>
         </footer>
     </div>
 

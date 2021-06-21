@@ -7,10 +7,11 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.Ajax.Utilities;
 
 namespace HungVdn1670.Controllers
 {
-    [Authorize(Roles = "staff")]
+    [Authorize(Roles = "staff,trainee")]
     public class TraineesController : Controller
     {
         private ApplicationDbContext _context;
@@ -27,14 +28,12 @@ namespace HungVdn1670.Controllers
         {
             return View();
         }
-
         [HttpGet]
-        public ActionResult ShowTrainees()
+        public ActionResult ShowTrainees(string searchString)
         {
             var users = _context.Users.ToList();
 
             var trainee = new List<ApplicationUser>();
-
             foreach (var user in users)
             {
                 if (_userManager.GetRoles(user.Id)[0].Equals("trainee"))
@@ -42,10 +41,12 @@ namespace HungVdn1670.Controllers
                     trainee.Add(user);
                 }
             }
-
+            if (!searchString.IsNullOrWhiteSpace())
+            {
+                trainee = trainee.Where(t => t.UserName.Contains(searchString)).ToList();
+            }
             return View(trainee);
         }
-
         [HttpGet]
         public ActionResult Details(string id)
         {
@@ -56,7 +57,12 @@ namespace HungVdn1670.Controllers
 
             return View(user);
         }
-
+        [HttpGet]
+        public ActionResult ShowAllCourses()
+        {
+            var courses = _context.Courses.ToList();
+            return View(courses);
+        }
         [HttpGet]
         public ActionResult Edit(string id)
         {
