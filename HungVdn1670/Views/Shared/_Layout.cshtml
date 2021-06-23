@@ -1,73 +1,338 @@
-﻿<!DOCTYPE html>
-<html>
+﻿@using Microsoft.AspNet.Identity
+@model IEnumerable<HungVdn1670.Models.ApplicationUser>
+
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>HungVdn1670</title>
+
+    <!-- Custom fonts for this template-->
+    <link href="~/lib/font-awesome/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+
+    <!-- Custom styles for this template-->
+    <link href="~/sbadmin/css/sb-admin-2.min.css" rel="stylesheet" />
 
 </head>
-<body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                    <span class="icon-bar"></span>
-                </button>
-                @Html.ActionLink("Application name", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center">
+                    <i class="fas fa-home"></i>
+                <div class="sidebar-brand-text mx-3">HungVdn 1670</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a>@Html.ActionLink(" Dashboard", "Index", "Home", null, new { @class = "fas fa-fw fa-tachometer-alt nav-link" })</a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Interface
             </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
-                    {
-                        <li>@Html.ActionLink("Staff", "Index", "Staffs")</li>
-                        <li>@Html.ActionLink("Trainer", "Index", "Trainers")</li>
-                    }
-                    @if (User.IsInRole("staff"))
-                    {
-                        <li>@Html.ActionLink("Trainer", "ShowTrainers", "Trainers")</li>
-                    }
-                    @if (User.IsInRole("staff"))
-                    {
-                        <li>@Html.ActionLink("Trainee", "Index", "Trainees")</li>
-                    }
-                    @if (User.IsInRole("staff"))
-                    {
-                        <li>@Html.ActionLink("Course", "Index", "Courses")</li>
-                    }
-                    @if (User.IsInRole("staff"))
-                    {
-                        <li>@Html.ActionLink("Category", "Index", "Categories")</li>
-                    }
-                    @if (User.IsInRole("trainee") || User.IsInRole("trainer"))
-                    {
-                        <li>@Html.ActionLink("My Courses", "Mine", "Courses")</li>
-                    }
-                    @if (User.IsInRole("trainee"))
-                    {
-                        <li>@Html.ActionLink("All Courses", "ShowAllCourses", "Trainees")</li>
-                    }
-                    <li>@Html.ActionLink("My Info", "Index", "UserDetails")</li>
-                </ul>
-                @Html.Partial("_LoginPartial")
+
+            <!-- Nav Item - Pages Collapse Menu -->
+            @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse1"
+                       aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Staffs</span>
+                    </a>
+                    <div id="collapse1" class="collapse">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Manage Staff</h6>
+                            <a>@Html.ActionLink("Create New Staff", "CreateStaff", "Account", null, new { @class = "collapse-item" })</a>
+                            <a>@Html.ActionLink("Show Staffs", "ShowStaffs", "Staffs", null, new { @class = "collapse-item" })</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse2"
+                       aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Trainer</span>
+                    </a>
+                    <div id="collapse2" class="collapse">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Manage Trainer</h6>
+                            <a>@Html.ActionLink("Create New Trainer", "CreateTrainer", "Account", null, new { @class = "collapse-item" })</a>
+                            <a>@Html.ActionLink("Show Trainer", "ShowTrainers", "Trainers", null, new { @class = "collapse-item" })</a>
+                        </div>
+                    </div>
+                </li>
+            }
+            @if (User.Identity.IsAuthenticated && User.IsInRole("staff"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse3"
+                       aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Trainer</span>
+                    </a>
+                    <div id="collapse3" class="collapse">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Manage Trainer</h6>
+                            <a>@Html.ActionLink("Show Trainer", "ShowTrainers", "Trainers", null, new { @class = "collapse-item" })</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse4"
+                       aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Trainee</span>
+                    </a>
+                    <div id="collapse4" class="collapse">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Manage Trainee</h6>
+                            <a>@Html.ActionLink("Create New Trainee", "CreateTrainee", "Account", null, new { @class = "collapse-item" })</a>
+                            <a>@Html.ActionLink("Show Trainee", "ShowTrainees", "Trainees", null, new { @class = "collapse-item" })</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse5"
+                       aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Course</span>
+                    </a>
+                    <div id="collapse5" class="collapse">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Manage Course</h6>
+                            <a>@Html.ActionLink("Create New Course", "Create", "Courses", null, new { @class = "collapse-item" })</a>
+                            <a>@Html.ActionLink("My Courses Report", "Report", "Courses", null, new { @class = "collapse-item" })</a>
+                            <a>@Html.ActionLink("Show Courses", "Index", "Courses", null, new { @class = "collapse-item" })</a>
+                        </div>
+                    </div>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse6"
+                       aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Category</span>
+                    </a>
+                    <div id="collapse6" class="collapse">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">Manage Course</h6>
+                            <a>@Html.ActionLink("Create New Category", "Create", "Categories", null, new { @class = "collapse-item" })</a>
+                            <a>@Html.ActionLink("Show Categories", "Index", "Categories", null, new { @class = "collapse-item" })</a>
+                        </div>
+                    </div>
+                </li>
+            }
+            @if (User.Identity.IsAuthenticated && User.IsInRole("trainer"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse7"
+                       aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Course</span>
+                    </a>
+                    <div id="collapse7" class="collapse">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">My Course</h6>
+                            <a>@Html.ActionLink("Show My Courses", "Mine", "Courses", null, new { @class = "collapse-item" })</a>
+                        </div>
+                    </div>
+                </li>
+            }
+            @if (User.Identity.IsAuthenticated && User.IsInRole("trainee"))
+            {
+                <li class="nav-item">
+                    <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapse8"
+                       aria-expanded="true" aria-controls="collapseTwo">
+                        <i class="fas fa-fw fa-cog"></i>
+                        <span>Course</span>
+                    </a>
+                    <div id="collapse8" class="collapse">
+                        <div class="bg-white py-2 collapse-inner rounded">
+                            <h6 class="collapse-header">My Course</h6>
+                            <a>@Html.ActionLink("Show My Courses", "Mine", "Courses", null, new { @class = "collapse-item" })</a>
+                            <a>@Html.ActionLink("Show All Courses", "ShowAllCourses", "Trainees", null, new { @class = "collapse-item" })</a>
+                        </div>
+                    </div>
+                </li>
+            }
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Topbar Search -->
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - Search Dropdown (Visible Only XS) -->
+                        <li class="nav-item dropdown no-arrow d-sm-none">
+                            <a class="nav-link dropdown-toggle" href="#" id="searchDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fas fa-search fa-fw"></i>
+                            </a>
+                            <!-- Dropdown - Messages -->
+                            <div class="dropdown-menu dropdown-menu-right p-3 shadow animated--grow-in"
+                                 aria-labelledby="searchDropdown">
+                                <form class="form-inline mr-auto w-100 navbar-search">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control bg-light border-0 small"
+                                               placeholder="Search for..." aria-label="Search"
+                                               aria-describedby="basic-addon2">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="button">
+                                                <i class="fas fa-search fa-sm"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </li>
+
+
+                        @if (Request.IsAuthenticated)
+                        {
+                            <!-- Nav Item - User Information -->
+                            <li class="nav-item dropdown no-arrow">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                   data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <span class="mr-2 d-none d-lg-inline text-gray-600 small">Account</span>
+
+                                </a>
+                                <!-- Dropdown - User Information -->
+                                <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                     aria-labelledby="userDropdown">
+                                    <a>
+                                        @Html.ActionLink("Profile", "Index", "UserDetails", null, new { @class = "dropdown-item" })
+                                    </a>
+                                    <a>
+                                        @Html.ActionLink("Manage Account", "Index", "Manage", null, new { @class = "dropdown-item", title = "Manage" })
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                        <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Logout
+                                    </a>
+                                </div>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav navbar-nav navbar-right">
+                                <a>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { @class = "btn btn-success", id = "registerLink" })</a>
+                                <a>@Html.ActionLink("Log in", "Login", "Account", routeValues: null, htmlAttributes: new { @class = "btn btn-primary", id = "loginLink" })<a />
+                            </li>
+                        }
+
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    @RenderBody();
+
+                </div>
+
+            </div>
+            <!-- End of Main Content -->
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright &copy; Os1riS Dem14n 2021</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+         aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { @class = "modal-footer", role = "form" }))
+                {
+                    @Html.AntiForgeryToken()
+
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Logout</button>
+                }
             </div>
         </div>
     </div>
-    <div class="container body-content">
-        @RenderBody()
-        <hr />
-        <footer>
-            <p>&copy; @DateTime.Now.Year - Os1riS Dem14n</p>
-        </footer>
-    </div>
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+    <!-- Bootstrap core JavaScript-->
+    <script src="~/lib/jquery/jquery.min.js"></script>
+    <script src="~/lib/boostrap/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="~/lib/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="~/sbadmin/js/sb-admin-2.min.js"></script>
+    @Scripts.Render("~/bundles/modernizr")
     @RenderSection("scripts", required: false)
+
 </body>
+
 </html>

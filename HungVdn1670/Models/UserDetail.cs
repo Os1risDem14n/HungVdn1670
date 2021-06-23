@@ -10,13 +10,13 @@ namespace HungVdn1670.Models
 		public string UserId { get; set; }
 		public ApplicationUser User { get; set; }
 		[Required]
-		[DisplayName("Course Name")]
+		[DisplayName("Ful Name")]
 		public string FullName { get; set; }
 		[Required]
 		public int Age { get; set; }
-
+		[DisplayName("TOEIC Score")]
 		public int TOEICScore { get; set; }
-
+		[DisplayName("Programming Language")]
 		public string ProgrammingLanguage { get; set; }
 	}
 }
