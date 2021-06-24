@@ -6,6 +6,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using HungVdn1670.ViewModels;
+using System.Threading.Tasks;
 
 namespace HungVdn1670.Controllers
 {
@@ -30,6 +32,7 @@ namespace HungVdn1670.Controllers
         [HttpGet]
         public ActionResult ShowTrainers()
         {
+            AdminChangePasswordViewModel mymodel = new AdminChangePasswordViewModel();
             var users = _context.Users.ToList();
 
             var trainer = new List<ApplicationUser>();
@@ -41,8 +44,8 @@ namespace HungVdn1670.Controllers
                     trainer.Add(user);
                 }
             }
-
-            return View(trainer);
+            mymodel.User = trainer;
+            return View(mymodel);
         }
     }
 }

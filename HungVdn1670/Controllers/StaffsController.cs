@@ -7,6 +7,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using HungVdn1670.ViewModels;
+using System.Threading.Tasks;
 
 namespace HungVdn1670.Controllers
 {
@@ -32,6 +34,7 @@ namespace HungVdn1670.Controllers
 		[HttpGet]
 		public ActionResult ShowStaffs()
 		{
+			AdminChangePasswordViewModel mymodel = new AdminChangePasswordViewModel();
 			var users = _context.Users.ToList();
 
 			var staffs = new List<ApplicationUser>();
@@ -43,8 +46,8 @@ namespace HungVdn1670.Controllers
 					staffs.Add(user);
 				}
 			}
-
-			return View(staffs);
+			mymodel.User = staffs;
+			return View(mymodel);
 		}
 
 		[HttpGet]
@@ -72,7 +75,7 @@ namespace HungVdn1670.Controllers
 			userInfoInDb.ProgrammingLanguage = userInfo.ProgrammingLanguage;
 			_context.SaveChanges();
 
-			return RedirectToAction("Index");
+			return RedirectToAction("ShowStaffs");
 		}
 
 		[HttpGet]
@@ -101,7 +104,7 @@ namespace HungVdn1670.Controllers
 			_context.Users.Remove(user);
 			_context.SaveChanges();
 
-			return RedirectToAction("Index");
+			return RedirectToAction("ShowStaffs");
 		}
 	}
 }

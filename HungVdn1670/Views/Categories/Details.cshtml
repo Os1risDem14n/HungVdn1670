@@ -4,7 +4,15 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
+
+
+<p></p>
+<ul class="list-group">
+    <li class="list-group-item active">Details</li>
+    <li class="list-group-item">Name: @Model.Name </li>
+    <li class="list-group-item">@Model.Description</li>
+</ul>
+<p></p>
 
 <div class="form-group">
     @Html.ActionLink(
@@ -13,12 +21,4 @@
         "Categories",
         null,
         new { @class = "btn btn-primary" })
-</div>
-
-<div class="panel panel-info">
-    <div class="panel-heading">Name: @Model.Name </div>
-    <div class="panel-body">
-        <p>Description: @Model.Description</p>
-
-    </div>
 </div>

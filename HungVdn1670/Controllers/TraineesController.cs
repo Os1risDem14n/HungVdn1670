@@ -11,7 +11,7 @@ using Microsoft.Ajax.Utilities;
 
 namespace HungVdn1670.Controllers
 {
-    [Authorize(Roles = "staff,trainee")]
+    [Authorize(Roles = "admin,staff,trainee")]
     public class TraineesController : Controller
     {
         private ApplicationDbContext _context;
@@ -88,7 +88,7 @@ namespace HungVdn1670.Controllers
             UserDetailInDb.ProgrammingLanguage = UserDetail.ProgrammingLanguage;
             _context.SaveChanges();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index","Home");
         }
 
 
@@ -107,7 +107,7 @@ namespace HungVdn1670.Controllers
             _context.Users.Remove(user);
             _context.SaveChanges();
 
-            return RedirectToAction("Index");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

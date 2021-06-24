@@ -5,8 +5,15 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
+<p></p>
+<ul class="list-group">
+    <li class="list-group-item active">Details</li>
+    <li class="list-group-item">Name: @Model.Name </li>
+    <li class="list-group-item">Category: @Model.Category.Name</li>
+    <li class="list-group-item">Start Date: @Model.StartDate.ToString("dd/MMM/yyyy")</li>
+    <li class="list-group-item">Description: @Model.Description</li>
+</ul>
+<p></p>
 @if (User.Identity.IsAuthenticated && User.IsInRole("staff"))
 {
     <div class="form-group">
@@ -18,12 +25,3 @@
             new { @class = "btn btn-primary" })
     </div>
 }
-
-<div class="panel panel-info">
-    <div class="panel-heading">Name: @Model.Name </div>
-    <div class="panel-body">
-        <p>Category: @Model.Category.Name</p>
-        <p>Start Date: @Model.StartDate.ToString("dd/MMM/yyyy")</p>
-        <p>Description: @Model.Description</p>
-    </div>
-</div>

@@ -5,13 +5,12 @@
     ViewBag.Title = "Details";
 }
 
-<h2>Details</h2>
-
-<div class="panel panel-info">
-    <div class="panel-heading">Name: @Model.FullName </div>
-    <div class="panel-body">
-        <p>Age: @Model.Age</p>
-        <p>TOEIC: @Model.TOEICScore</p>
-        <p>Programming Language: @Model.ProgrammingLanguage</p>
-    </div>
-</div>
+<p></p>
+<ul class="list-group">
+    <li class="list-group-item active">Details</li>
+    <li class="list-group-item">Full Name: @Model.FullName</li>
+    <li class="list-group-item">Age: @Model.Age</li>
+    <li class="list-group-item">TOEIC: @Model.TOEICScore</li>
+    <li class="list-group-item">Programming Language: @Model.ProgrammingLanguage</li>
+</ul>
+<p></p>

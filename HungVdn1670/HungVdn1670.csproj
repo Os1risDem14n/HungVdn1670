@@ -207,6 +207,7 @@
     <Compile Include="Startup.cs" />
     <Compile Include="ViewModels\CourseCategoriesViewModel.cs" />
     <Compile Include="ViewModels\SatisticalReportViewModel.cs" />
+    <Compile Include="ViewModels\AdminChangePasswordViewModel.cs" />
     <Compile Include="ViewModels\UserInCoursesViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -382,6 +383,8 @@
     <Content Include="Views\Account\CreateTrainer.cshtml" />
     <Content Include="Views\Shared\_LoginLayout.cshtml" />
     <Content Include="Views\Trainees\ShowAllCourses.cshtml" />
+    <Content Include="Views\Trainers\AdminChangePassword.cshtml" />
+    <Content Include="Views\Account\AdminChangePassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

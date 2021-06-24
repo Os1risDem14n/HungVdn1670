@@ -9,7 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using HungVdn1670.Models;
-using HungVdn1670;
+using HungVdn1670.ViewModels;
 
 namespace HungVdn1670.Controllers
 {
@@ -170,7 +170,7 @@ namespace HungVdn1670.Controllers
                     _context.UserDetails.Add(userDetail);
                     _context.SaveChanges();
 
-                    return RedirectToAction("Index", "Staffs");
+                    return RedirectToAction("ShowStaffs", "Staffs");
                 }
                 AddErrors(result);
             }
@@ -204,7 +204,7 @@ namespace HungVdn1670.Controllers
                     _context.UserDetails.Add(userDetail);
                     _context.SaveChanges();
 
-                    return RedirectToAction("Index", "Trainers");
+                    return RedirectToAction("ShowTrainers", "Trainers");
                 }
                 AddErrors(result);
             }
@@ -238,7 +238,7 @@ namespace HungVdn1670.Controllers
                     _context.UserDetails.Add(userDetail);
                     _context.SaveChanges();
 
-                    return RedirectToAction("Index", "Trainees");
+                    return RedirectToAction("ShowTrainees", "Trainees");
                 }
                 AddErrors(result);
             }
@@ -535,7 +535,64 @@ namespace HungVdn1670.Controllers
 
             base.Dispose(disposing);
         }
-
+        [Authorize(Roles =("admin"))]
+        [HttpGet]
+        public ActionResult AdminChangePassword(string id)
+        {
+            var user = UserManager.FindByIdAsync(id);
+            if (user == null)
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            var temp = new AdminChangePasswordViewModel()
+            {
+                NewPassword = "",
+                ConfirmPassword = "",
+                UserId = id
+            };
+            return View(temp);
+        }
+        [Authorize(Roles ="admin")]
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> AdminChangePassword(AdminChangePasswordViewModel temp)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(temp);
+            }
+            var user = await UserManager.FindByIdAsync(temp.UserId);
+            if (user == null)
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            await UserManager.RemovePasswordAsync(user.Id);
+            var result = await UserManager.AddPasswordAsync(user.Id, temp.NewPassword);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            AddErrors(result);
+            return View(temp);     
+        }
+        [Authorize(Roles = "admin")]
+        public async Task<ActionResult> ResetPasswordStaff(string id)
+        {
+            var user = await UserManager.FindByIdAsync(id);
+            if (user == null)
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            await UserManager.RemovePasswordAsync(id);
+            var password = "Os1riSDem14n@@@";
+            await UserManager.AddPasswordAsync(user.Id, password);
+            return RedirectToAction("ShowStaffs", "Staffs");
+        }
+        [Authorize(Roles = "admin")]
+        public async Task<ActionResult> ResetPasswordTrainer(string id)
+        {
+            var user = await UserManager.FindByIdAsync(id);
+            if (user == null)
+                return new HttpStatusCodeResult(System.Net.HttpStatusCode.BadRequest);
+            await UserManager.RemovePasswordAsync(id);
+            var password = "Os1riSDem14n@@@";
+            await UserManager.AddPasswordAsync(user.Id, password);
+            return RedirectToAction("ShowTrainers", "Trainers");
+        }
         #region Helpers
         // Used for XSRF protection when adding external logins
         private const string XsrfKey = "XsrfId";
