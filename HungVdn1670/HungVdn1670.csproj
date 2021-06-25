@@ -195,6 +195,10 @@
     <Compile Include="Migrations\202106201800223_CreateUserDetailDB.Designer.cs">
       <DependentUpon>202106201800223_CreateUserDetailDB.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\202106250215168_UpdateDbUnique.cs" />
+    <Compile Include="Migrations\202106250215168_UpdateDbUnique.Designer.cs">
+      <DependentUpon>202106250215168_UpdateDbUnique.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Category.cs" />
@@ -307,6 +311,10 @@
     <Content Include="lib\boostrap\dist\js\bootstrap.bundle.min.js.map" />
     <Content Include="lib\boostrap\dist\js\bootstrap.js.map" />
     <Content Include="lib\boostrap\dist\js\bootstrap.min.js.map" />
+    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\hungvdn1670 - Web Deploy.pubxml" />
+    <None Include="Properties\PublishProfiles\IISProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\IISProfile1.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -414,6 +422,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\202106201800223_CreateUserDetailDB.resx">
       <DependentUpon>202106201800223_CreateUserDetailDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202106250215168_UpdateDbUnique.resx">
+      <DependentUpon>202106250215168_UpdateDbUnique.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

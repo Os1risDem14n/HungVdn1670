@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HungVdn1670.Models
 {
@@ -9,6 +10,7 @@ namespace HungVdn1670.Models
 		[Key]
 		public int Id { get; set; }
 		[Required]
+		[Index(IsUnique = true)]
 		[StringLength(255)]
 		[DisplayName("Course Name")]
 		public string Name { get; set; }

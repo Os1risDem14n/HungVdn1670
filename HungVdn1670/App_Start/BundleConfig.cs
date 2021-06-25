@@ -17,14 +17,23 @@ namespace HungVdn1670
             // Use the development version of Modernizr to develop with and learn from. Then, when you're
             // ready for production, use the build tool at https://modernizr.com to pick only the tests you need.
             bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                        "~/Scripts/modernizr-*"));
+                        "~/Scripts/modernizr-*",
+                        "~/lib/jquery/jquery.min.js",
+                        "~/lib/boostrap/dist/js/bootstrap.bundle.min.js",
+                        "~/lib/jquery-easing/jquery.easing.min.js",
+                        "~/sbadmin/js/sb-admin-2.min.js"
+                        ));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/lib/font-awesome/css/all.min.css",
+                      "~/sbadmin/css/sb-admin-2.min.css",
+                      "~/Content/site.css",
+                      "~/Content/bootstrap.min.css",
+                      "~/Content/Site.css"));
         }
     }
 }
