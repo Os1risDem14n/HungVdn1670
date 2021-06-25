@@ -37,11 +37,17 @@ namespace HungVdn1670.Controllers
 		[Authorize(Roles = "staff")]
 		public ActionResult Create(Category category)
 		{
+			var isExists = _context.Categories.Any(x => x.Name == category.Name);
+			if (isExists)
+			{
+				ModelState.AddModelError("Name", "Name already exists");
+				return View(category);
+
+			}
 			if (!ModelState.IsValid)
 			{
 				return View(category);
 			}
-
 			var newCategory = new Category
 			{
 				Name = category.Name,

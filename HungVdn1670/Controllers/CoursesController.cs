@@ -56,6 +56,17 @@ namespace HungVdn1670.Controllers
 		[Authorize(Roles = "staff")]
 		public ActionResult Create(Course course)
 		{
+			var isExists = _context.Courses.Any(x => x.Name == course.Name);
+			if (isExists)
+			{
+				var viewModel = new CourseCategoriesViewModel()
+				{
+					Categories = _context.Categories.ToList()
+				};
+				ModelState.AddModelError("Name", "Name already exists");
+				return View(viewModel);
+
+			}
 			if (!ModelState.IsValid)
 			{
 				var viewModel = new CourseCategoriesViewModel()
@@ -64,8 +75,7 @@ namespace HungVdn1670.Controllers
 					Categories = _context.Categories.ToList()
 				};
 				return View(viewModel);
-			}
-
+			}	
 			var newCourse = new Course
 			{
 				Name = course.Name,
